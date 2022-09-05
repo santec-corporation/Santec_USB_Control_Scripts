@@ -9,7 +9,7 @@ import time
 import clr
 import sys
 
-assembly_path = r".\TSL550-master" #deviceclass path
+assembly_path = r".\DLL" #deviceclass path
 sys.path.append(assembly_path)
 ref = clr.AddReference(r"Santec_FTDI")
 

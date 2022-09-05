@@ -10,7 +10,7 @@ import time
 import clr
 import sys
 
-assembly_path = r".\TSL570_USB"                                                #dll path
+assembly_path = r".\DLL"                                                #dll path
 sys.path.append(assembly_path)
 ref = clr.AddReference(r"Santec_FTDI")
 
@@ -95,6 +95,6 @@ TSL.Write('WAV:SWE:SOFT')
 opc = 0
 while opc  == 0:
     opc = TSL.Query('*OPC?')
-    break    
+    break
 
-raw = [i/10000 for i in TSL.GetAllDataPointsFromLastScan_SCPICommand()]        #Read LOG data 
+raw = [i/10000 for i in TSL.GetAllDataPointsFromLastScan_SCPICommand()]        #Read LOG data
