@@ -5,7 +5,6 @@ Created on Mon Sep 27 18:42:37 2021
 @author: chentir
 """
 
-# import pyvisa
 import time
 import clr
 import sys
@@ -19,18 +18,18 @@ from Santec_FTDI import FTD2xx_helper
 
 TSL = FTD2xx_helper()
 raw = []
-Raw = []
 
 TSL.Write('*CLS')
 TSL.Write('*RST')
 TSL.Write('SYST:COMM:GPIB:DEL 2')                                              #Select CF+LF GPIB delimiter
-TSL.Write('GC 1')
-check0=TSL.Query('POW:STAT?')                                                  #Set communication into SCPI command
+TSL.Write('SYST:COMM:COD 0')                                                   #Set communication into LEGACY command
+TSL.Write('TRIG:OUTP:SETT 0')                                                  #Sets the output trigger to be periodic in wavelength. Arg= 1 to set the trigger to be periodic in time
+check0=TSL.Query('POW:STAT?')                                                  
 if check0=='0':
     TSL.Write('POW:STAT 1')                                                    #Sets LD ON
     print ('LD switching ON, please wait')
     while True:
-        if int(TSL.Query('*OPC?'))==0:
+        if int(TSL.Query('POW:STAT?'))==0:
             time.sleep(10)
         else:
             print('LD is ON now')
@@ -47,12 +46,12 @@ TSL.Write('AM:STAT 0')                                                         #
 TSL.Write('PW:SHUT 0')                                                         #Opens Internal Shutter
 TSL.Write('WAV:SWE 0')
 
-TSL.Write(':TRIG:OUTP 3')                                                      #Set trigger output as Step
+TSL.Write('TRIG:OUTP 3')                                                       #Set trigger output as Step
 TSL.Write('TRIG:INP:EXT 0')                                                    #Disable EXT trigger
 
 print('Input output power')
 PWR = input()
-TSL.Write('POW '+PWR)
+TSL.Write(f'POW {PWR}')
 
 TSL.Write('WAV:SWE:MOD 1')
 
