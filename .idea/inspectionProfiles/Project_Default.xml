@@ -1,0 +1,43 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N813" />
+          <option value="N802" />
+          <option value="N801" />
+          <option value="N803" />
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="pyvisa.resources.resource.Resource.query" />
+          <option value="SantecInstruments.Devices.TSL.TSL.*" />
+          <option value="SantecInstruments.Devices.MPM.MPM.*" />
+          <option value="typing._SpecialForm.__setitem__" />
+          <option value="tuple.strip" />
+          <option value="list.strip" />
+          <option value="tsl_command_class.TSL.write" />
+          <option value="pyvisa.resources.resource.Resource.write" />
+          <option value="pyvisa.resources.resource.Resource.read" />
+          <option value="clr.AddReference" />
+          <option value="str.query" />
+          <option value="pyvisa.resources.resource.Resource.query_binary_values" />
+          <option value="tests.basicPowerfromMPM.connect.query" />
+          <option value="Santec_FTDI" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
