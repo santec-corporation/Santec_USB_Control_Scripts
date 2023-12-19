@@ -6,21 +6,25 @@
 
 A DLL file written in .NET Framework 4.7.2 which serves as a wrapper to the FTDI DLL, for use with Santec TSL devices connected through USB. 
 
+
 <h2>Introduction</h2>
 
 The Santec FTD2xx_helper DLL is designed to connect to a TSL and easily obtain the data points from the previous scan. It uses the FTDI driver for USB communication, and provides simple command line communication with the TSL.
 
+
 <h2>Requirements</h2>
 
-1) The FTDI2XX driver. Santec can provide a version of this DLL that has been thoroughly tested across various TSL devices. Alternatively, the newest driver can be downloaded from https://ftdichip.com/drivers/d2xx-drivers/ . Once the TSL is connected via USB, you may initially need to update the driver from Device Manager, using the driver files
+   1) The FTDI2XX driver. Santec can provide a version of this DLL that has been thoroughly tested across various TSL devices. Alternatively, the newest driver can be downloaded from https://ftdichip.com/drivers/d2xx-drivers/ . Once the TSL is connected via USB, you may initially need to update the driver from Device Manager, using the driver files
 
-2) The FTDI DLL file. This should be the FTDI-provided “FTD2XX_NET.dll” file. This can either be provided by Santec, or from the FTDI site directly, from https://ftdichip.com/software-examples/code-examples/csharp-examples/ . This should NOT be the file “FTDI2XX.dll”, which is also provided by FTDI, but not used by the Santec_FTDI DLL.  For best results, this DLL file should be in the same directory as Santec_FTDI.dll. 
+   2) The FTDI DLL file. This should be the FTDI-provided “FTD2XX_NET.dll” file. This can either be provided by Santec, or from the FTDI site directly, from https://ftdichip.com/software-examples/code-examples/csharp-examples/ . This should NOT be the file “FTDI2XX.dll”, which is also provided by FTDI, but not used by the Santec_FTDI DLL.  For best results, this DLL file should be in the same directory as Santec_FTDI.dll. 
 
-3) A TSL that supports both USB communication, and either Santec commands or SCPI commands. Please note that Legacy commands are not supported. 
+   3) A TSL that supports both USB communication, and either Santec commands or SCPI commands. Please note that Legacy commands are not supported. 
+
 
 <h2>Prerequisites</h2>
 
 The DLL can be used by any language that can load the .NET DLL and access its functions. This includes languages like Python, C#, PowerShell, MATLAB, etc. 
+
 
 <h2>Properties</h2>
 
@@ -32,6 +36,7 @@ The Santec_FTDI wrapper contains the following properties
 |lastConnectedSerialNumber | The most recently connected serial number is automatically set to this property, which allows it to be easily reconnected.|
 |ftdi | The internal instance of the FTDI object, which is contained in the wrapped FTDI2XX.dll file. |
 |ftdiDeviceList | The internal array of FTDI devices, which is contained in the wrapped FTDI2XX.dll file. |
+
 
 <h2>Methods</h2>
 
@@ -46,6 +51,7 @@ The Santec_FTDI wrapper contains the following methods
 |QueryIdn() | Sends "*IDN?" and returns the response.|
 |GetAllDataPointsFromLastScan_SCPICommand() | Get an int[] array of all data points from the last TSL scan. This may take several seconds to retrieve. <br /> This uses the command “READout:DATa?”, and obtains the data from the TSL using little endian format. |
 |GetAllDataPointsFromLastScan_SantecCommand() | Get an int[] array of all data points from the last TSL scan. This may take several seconds to retrieve. <br />This uses the command “TA”, and obtains the data from the TSL using big endian format.|
+
 
 <h2>Example</h2>
 
