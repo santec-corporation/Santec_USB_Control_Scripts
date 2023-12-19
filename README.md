@@ -16,7 +16,7 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 
 <h2>Requirements</h2>
 
-- Python version - any version 
+- Python version - ( any version )
 
 - Make sure you have the USB Driver, Download the USB Driver ([CLICK HERE](https://downloads.santec.com/files/downloadfile/6dbd36cd-a29e-4ca0-a894-8ba4e4fdf0c5))
 
@@ -41,9 +41,10 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 
 
 <h2>DLL List</h2>
-- Santec_FTDI.dll
-- FTD2XX_NET.dll
-- FTDI2XX.dll
+
+  - Santec_FTDI.dll
+  - FTD2XX_NET.dll
+  - FTDI2XX.dll
 
 
 <h2>Writing your own script [Python Demo]</h2>
