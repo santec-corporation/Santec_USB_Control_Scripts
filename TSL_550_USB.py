@@ -31,7 +31,7 @@ TSL.Write('GC 0')                                                               
 TSL.Write('GD2')                                                                # Select CF+LF GPIB delimiter
 
 
-# Checks if TSL Laser Diode (LD) is ON, else switches it ON
+# Checks if TSL Laser Diode (LD) is ON
 check0 = TSL.Query('SU')[0]             # Checks if LD is ON
 print(check0)
 if check0 != '-':
