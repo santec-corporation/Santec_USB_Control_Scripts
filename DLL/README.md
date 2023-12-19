@@ -36,6 +36,7 @@ The Santec_FTDI wrapper contains the following properties
 |lastConnectedSerialNumber | The most recently connected serial number is automatically set to this property, which allows it to be easily reconnected.|
 |ftdi | The internal instance of the FTDI object, which is contained in the wrapped FTDI2XX.dll file. |
 |ftdiDeviceList | The internal array of FTDI devices, which is contained in the wrapped FTDI2XX.dll file. |
+|EEPROMData | The contents of the device EEPROM. NULL is returned if the device EEPROM cannot be read. |
 
 
 <h2>Methods</h2>

@@ -19,7 +19,8 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 
   - Python version - ( any version )
 
-  - Make sure you have the USB Driver, Download the USB Driver ([CLICK HERE](https://downloads.santec.com/files/downloadfile/6dbd36cd-a29e-4ca0-a894-8ba4e4fdf0c5))
+  - Make sure you have the USB Driver (FTDI D2XX), or you can<br>
+    Download the [USB DRIVER](https://downloads.santec.com/files/downloadfile/6dbd36cd-a29e-4ca0-a894-8ba4e4fdf0c5), and follow the [INSTRUCTIONS](https://github.com/santec-corporation/TSL_USB_Control_Scripts/blob/ea5c7f016f391d65151b16d61111f892415adb49/DLL/USB_Driver_Installation.pdf) to install the driver on your local machine.
 
   - Once the USB driver is downloaded, make sure that you are able to recognize the TSL-(model) in the System Device Manager.
 
