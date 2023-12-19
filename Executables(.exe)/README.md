@@ -17,5 +17,6 @@
 
 
 <h2>Files</h2>
+
 1) TSL_550_USB.exe  -  This file communicates with the TSL with the use Santec Commands (Command Set-2).
 **This script works for TSL-550, TSL-710 devices.
