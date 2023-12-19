@@ -33,15 +33,17 @@ TSL.Write('GD2')                                                                
 
 # Checks if TSL Laser Diode (LD) is ON, else switches it ON
 check0 = TSL.Query('SU')[0]             # Checks if LD is ON
-if check0 == '-' or 'N':
-    pass
-else:
-    TSL.Write('LO')                                                             # Sets LD ON
+print(check0)
+if check0 != '-':
+    TSL.Write('LO')  # Sets LD ON
     print('LD switching ON, please wait')
     while TSL.Query('SU')[0] != '-':
         time.sleep(1)
         pass
     print('LD is ON now')
+else:
+    pass
+
 
 # Pre-setting Parameters
 TSL.Write('SQ')                                                                 # Stops any precedent sweep
