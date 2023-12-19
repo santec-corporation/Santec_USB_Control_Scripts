@@ -18,8 +18,8 @@
 
 <h2>Files</h2>
 
-1) TSL_550_USB.exe  -  This file communicates with the TSL with the use Santec Commands (Command Set-2).
+1) TSL_550_USB.exe  -  This file communicates with the TSL with the use Santec Commands (Command Set-2). <br>
 **This script works for TSL-550, TSL-710 devices.
 
-2) TSL_570_USB.exe  -  This file communicates with the TSL with the use SCPI Commands.
+2) TSL_570_USB.exe  -  This file communicates with the TSL with the use SCPI Commands. <br>
 **This script works for TSL-570, TSL-770 devices.
