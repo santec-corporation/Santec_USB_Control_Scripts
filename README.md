@@ -1,10 +1,13 @@
 <p align="right"> <a href="https://www.santec.com/jp/" target="_blank" rel="noreferrer"> <img src="https://www.santec.com/dcms_media/image/common_logo01.png" alt="santec" 
   width="250" height="45"/> </a> </p>
 
-![GitHub top language](https://img.shields.io/github/languages/top/santec-corporation/TSL_USB_Control_Scripts?color=blue)
+> [!NOTE]
+> If you have any [Issues](https://github.com/santec-corporation/TSL_USB_Control_Scripts/issues) related to the code, click [Create New](https://github.com/santec-corporation/TSL_USB_Control_Scripts/issues/new) to create a new issue. 
 
 
 <h1>TSL USB Control Scripts</h1>
+
+![GitHub top language](https://img.shields.io/github/languages/top/santec-corporation/TSL_USB_Control_Scripts?color=blue)
 
 Python Scripts to command and manage Santec TSL Device(s) connected via USB utilizing the Santec_FTDI DLL as the backend. <br>
 For all TSL Models. Read Below for more information.
@@ -19,7 +22,13 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 
 <h2>Requirements</h2>
 
-  - Python version - ( any version )
+  - [Python](https://www.python.org/) - any version ( Latest Version advisable ), <br>
+    install the latest version [Python Latest](https://www.python.org/downloads/), <br>
+    to upgrade existing one ``` pip install --upgrade python ```
+
+  - [Pythonnet](https://pypi.org/project/pythonnet/) - any version ( Latest Version advisable ), <br>
+    to install, use ``` pip install pythonnet ``` or ``` pip3 install pythonnet ``` <br>
+    to upgrade existing one ```pip install --upgrade pythonnet```
 
   - Make sure you have the USB Driver (FTDI D2XX), or you can<br>
     Download the [USB DRIVER](https://downloads.santec.com/files/downloadfile/6dbd36cd-a29e-4ca0-a894-8ba4e4fdf0c5), and follow the [INSTRUCTIONS](https://github.com/santec-corporation/TSL_USB_Control_Scripts/blob/ea5c7f016f391d65151b16d61111f892415adb49/DLL/USB_Driver_Installation.pdf) to install the driver on your local machine.
@@ -67,22 +76,27 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 <summary><h2>Writing your own script [Python Demo]</h2> </summary>
 
 1) Make sure that the DLL directory containing all the three DLLs in the same directory as your script.
-
-2) Accessing the DLL,
+2) Basic Imports, 
+    ```python
+    import clr      # Using the 'pythonnet' package, which provides Python bindings for .NET
+    import sys      # Using sys to modify the import path to include a specific directory (assembly_path)
+    ```
+    
+3) Accessing the DLL,
     ```python
     assembly_path = r".\DLL"                                                
     sys.path.append(assembly_path)
     ref = clr.AddReference(r"Santec_FTDI")
     ```
 
-3) Importing the namespace and creating an instance to the main class,
+4) Importing the namespace and creating an instance to the main class,
     ```python
     import Santec_FTDI as ftdi              # Santec_FTDI is the main namespace
     
     TSL = ftdi.FTD2xx_helper()              # TSL is an instance to the class FTD2xx_helper
     ```
 
-4) To print the list of connected TSLs with their information (mainly Serial Number),
+5) To print the list of connected TSLs with their information (mainly Serial Number),
     Using the properties of the DLL (check the README of the DLL directory for more info)
     ```python
     for i in range(TSL.numDevices):
@@ -95,7 +109,7 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
         print("")
     ```
 
-5) Creating a new instance to initialize and control the specific TSL device by passing the Serial Number as a parameter,
+6) Creating a new instance to initialize and control the specific TSL device by passing the Serial Number as a parameter,
     ```python
     TSL = ftdi.FTD2xx_helper('15070009')        # Replace the with the Instrument Serial Number
     ```
@@ -108,7 +122,7 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
     TSLn = ftdi.FTD2xx_helper('00000000')
     ```
 
-6) Use Query() method for querying or reading from the TSL by passing in the instrument command,
+7) Use Query() method for querying or reading from the TSL by passing in the instrument command,
     ```python
     TSL.Query('*IDN?')                 # Outputs: SANTEC TSL-(ModelNo.), Serial Number, Version Number
     ```
@@ -118,12 +132,12 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
     TSL.QueryIdn()                     # Outputs: SANTEC TSL-(ModelNo.), Serial Number, Version Number
     ```
 
-7) Use Write() method for writing to the TSL,
+8) Use Write() method for writing to the TSL,
     ```python
     TSL.Write('OP10')                   # Sets the Output power of TSL to 10dBm(or mW)
     ```
 
-8) Reading the Wavelength data from the TSL, <br>
+9) Reading the Wavelength data from the TSL, <br>
 
  - For TSL-550, TSL-710, using the GetAllDataPointsFromLastScan_SantecCommand() method,
     ```python
