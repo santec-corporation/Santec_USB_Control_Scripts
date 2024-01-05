@@ -10,14 +10,14 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/santec-corporation/TSL_USB_Control_Scripts?color=blue)
 
 Python Scripts to command and manage Santec TSL Device(s) connected via USB utilizing the Santec_FTDI DLL as the backend. <br>
-For all TSL Models. Read Below for more information.
+For all TSL Models. Read below for more information.
 
 
 <h2>Introduction</h2>
 
-The Santec TSL Devices connected via USB can be controlled using python scripts with the help of a DLL (Santec_FTDI).
+The Santec TSL Devices connected via USB can be controlled using Python scripts with the help of a DLL (Santec_FTDI).
 
-The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and easily obtain the data points from the previous scan. It uses the FTDI driver for USB communication, and provides simple command line communication with the TSL.
+The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and easily obtain the data points from the previous scan. It uses the FTDI driver for USB communication and provides simple command-line communication with the TSL.
 
 
 <h2>Requirements</h2>
@@ -41,24 +41,24 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 
 <h2>Major Scripts</h2>
 
-  1) TSL_550_USB.py  -  This script communicates with the TSL with the use Santec Commands (Command Set-2). <br>
+  1) TSL_550_USB.py  -  This script communicates with the TSL with the use of Santec Commands (Command Set-2). <br>
 **This script works for TSL-550, TSL-710 devices.
 
-  2) TSL_570_USB.py  -  This script communicates with the TSL with the use SCPI Commands. <br>
+  2) TSL_570_USB.py  -  This script communicates with the TSL with the use of SCPI Commands. <br>
 **This script works for TSL-570 devices.
 
 
   #### Executable files (.exe)  [ Available in the [Releases](https://github.com/santec-corporation/TSL_USB_Control_Scripts/releases) with the README]
-  3) TSL_550_USB.exe  -  This file communicates with the TSL with the use Santec Commands (Command Set-2). <br>
+  3) TSL_550_USB.exe  -  This file communicates with the TSL with the use of Santec Commands (Command Set-2). <br>
 **This script works for TSL-550, TSL-710 devices.
 
-  4) TSL_570_USB.exe  -  This file communicates with the TSL with the use SCPI Commands. <br>
+  4) TSL_570_USB.exe  -  This file communicates with the TSL with the use of SCPI Commands. <br>
 **This script works for TSL-570, TSL-770 devices.
 
 
   #### Additional Scripts [ In Directory [Additional Scripts](https://github.com/santec-corporation/TSL_USB_Control_Scripts/tree/89912792db0268fdf18e949810e1efa820066026/Additional%20Scripts) ]
   
-  5) MULTI_TSL_550_USB.py  -  Example script to control two or more TSL devices. This script communicates with the TSL with the use Santec Commands (Command Set-2). <br>
+  5) MULTI_TSL_550_USB.py  -  Example script to control two or more TSL devices. This script communicates with the TSL using Santec Commands (Command Set-2). <br>
 **This script works for TSL-550, TSL-710 devices.
 
   6) SIMUL_MULTI_TSL_550_USB.py  -  Example script to run two or more TSL devices simultaneously at the same time (uses Santec Commands). <br>
@@ -75,7 +75,7 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 <details>
 <summary><h2>Writing your own script [Python Demo]</h2> </summary>
 
-1) Make sure that the DLL directory containing all the three DLLs in the same directory as your script.
+1) Make sure that the DLL directory contains all the three DLLs in the same directory as your script.
 2) Basic Imports, 
     ```python
     import clr      # Using the 'pythonnet' package, which provides Python bindings for .NET
@@ -122,7 +122,7 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
     TSLn = ftdi.FTD2xx_helper('00000000')
     ```
 
-7) Use Query() method for querying or reading from the TSL by passing in the instrument command,
+7) Use the Query() method for querying or reading from the TSL by passing in the instrument command,
     ```python
     TSL.Query('*IDN?')                 # Outputs: SANTEC TSL-(ModelNo.), Serial Number, Version Number
     ```
@@ -132,7 +132,7 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
     TSL.QueryIdn()                     # Outputs: SANTEC TSL-(ModelNo.), Serial Number, Version Number
     ```
 
-8) Use Write() method for writing to the TSL,
+8) Use the Write() method for writing to the TSL,
     ```python
     TSL.Write('OP10')                   # Sets the Output power of TSL to 10dBm(or mW)
     ```
@@ -168,14 +168,14 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 <details>
 <summary><h2>About Santec Swept Test System</h2></summary>
 
-### What is STS IL PDL ?
-  The Swept Test System is the photonic solution by santec Corp. to perform Wavelength 
+### What is STS IL PDL?
+  The Swept Test System is the photonic solution by Santec Corp. to perform Wavelength 
   Dependent Loss characterization of passive optical devices.
   It consists of:
-  - A light source: santec’s Tunable Semiconductor Laser (TSL);
-  - A power meter: santec’s Multi-port Power Meter (MPM);
+  - A light source: Santec’s Tunable Semiconductor Laser (TSL);
+  - A power meter: Santec’s Multi-port Power Meter (MPM);
    
 
-### For more information on Swept Test System [CLICK HERE](https://inst.santec.com/products/componenttesting/sts)
+### For more information on the Swept Test System [CLICK HERE](https://inst.santec.com/products/componenttesting/sts)
 </details>
 
