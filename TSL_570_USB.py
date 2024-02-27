@@ -20,9 +20,29 @@ ref = clr.AddReference(r"Santec_FTDI")
 # Importing the main method from the DLL
 import Santec_FTDI as ftdi
 
+# Checking for Santec instruments and selecting a TSL
+ftdi_class = ftdi.FTD2xx_helper
 
-# Object to method to control the instrument
-TSL = ftdi.FTD2xx_helper()                 # you can also pass the instrument serial number as parameter of a specific device
+list_of_devices = ftdi_class.ListDevices()
+
+tslDevice_list = []
+
+for device in list_of_devices:
+    if 'TSL' in device.Description:
+        tslDevice_list.append(device)
+
+for tsl in range(len(tslDevice_list)):
+    print(f'TSL number: {tsl+1}, Name: {tslDevice_list[tsl].Description}, Serial Number: {tslDevice_list[tsl].SerialNumber}')
+
+TSL = None
+
+if tslDevice_list:
+    user_select = int(input('\nEnter the TSL number to control')) - 1
+
+    user_select_tsl_serial = tslDevice_list[user_select].SerialNumber
+    TSL = ftdi.FTD2xx_helper(user_select_tsl_serial)
+
+print(f'\nSelected TSL Device: {TSL.QueryIdn()}')
 
 
 # Basic commands
@@ -35,15 +55,15 @@ TSL.Write('TRIG:OUTP:SETT 0')      # Sets the output trigger to be periodic in w
 
 # Checks if TSL Laser Diode (LD) is ON
 check0 = TSL.Query('POW:STAT?')
-print(check0)
+# print(check0)
 if check0 == '0':
     TSL.Write('POW:STAT 1')             # Sets LD ON
-    print('LD switching ON, please wait')
+    print('\nLD switching ON, please wait')
     while True:
         if int(TSL.Query('POW:STAT?')) == 0:
             time.sleep(10)
         else:
-            print('LD is ON now')
+            print('\nLD is ON now')
             break
 else:
     pass
@@ -64,28 +84,28 @@ TSL.Write('TRIG:INP:EXT 0')         # Disable EXT trigger
 
 
 # Input parameters
-print('Input output power')
+print('\nInput output power')
 PWR = input()
 TSL.Write(f'POW {PWR}')
 
 TSL.Write('WAV:SWE:MOD 1')                # Sets sweep to continuous mode one way. Needs soft trigger to start the sweep
 
-print('Input start wavelength:')
+print('\nInput start wavelength:')
 WLS = input()
 TSL.Write('WAV:SWE:STAR '+WLS)
 TSL.Write('WAV '+WLS)
-print('Input end wavelength:')
+print('\nInput end wavelength:')
 WLE = input()
 TSL.Write('WAV:SWE:STOP '+WLE)
 
-print('Input scan speed:')
+print('\nInput scan speed:')
 speed = input()
 TSL.Write('WAV:SWE:SPE '+speed)
 
 TSL.Write('WAV:SWE:DEL 0')
 TSL.Write('WAV:SWE:CYCL 1')             # Sets repeat cycles to 1 repetition
 
-print('Input Step (pm)')
+print('\nInput Step (pm)')
 Step = str(float(input())/1000)
 TSL.Write('TRIG:OUTP:STEP '+Step)
 
