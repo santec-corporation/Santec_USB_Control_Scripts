@@ -47,22 +47,7 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
   2) TSL_570_USB.py  -  This script communicates with the TSL with the use of SCPI Commands. <br>
 **This script works for TSL-570 devices.
 
-
-  #### Executable files (.exe)  [ Available in the [Releases](https://github.com/santec-corporation/TSL_USB_Control_Scripts/releases) with the README]
-  3) TSL_550_USB.exe  -  This file communicates with the TSL with the use of Santec Commands (Command Set-2). <br>
-**This script works for TSL-550, TSL-710 devices.
-
-  4) TSL_570_USB.exe  -  This file communicates with the TSL with the use of SCPI Commands. <br>
-**This script works for TSL-570, TSL-770 devices.
-
-
-  #### Additional Scripts [ In Directory [Additional Scripts](https://github.com/santec-corporation/TSL_USB_Control_Scripts/tree/89912792db0268fdf18e949810e1efa820066026/Additional%20Scripts) ]
-  
-  5) MULTI_TSL_550_USB.py  -  Example script to control two or more TSL devices. This script communicates with the TSL using Santec Commands (Command Set-2). <br>
-**This script works for TSL-550, TSL-710 devices.
-
-  6) SIMUL_MULTI_TSL_550_USB.py  -  Example script to run two or more TSL devices simultaneously at the same time (uses Santec Commands). <br>
-**This script works for TSL-550, TSL-710 devices.
+*Executable files can be found in the **[Releases](https://github.com/santec-corporation/TSL_USB_Control_Scripts/releases)**.
 
 
 <h2>DLL List</h2>
