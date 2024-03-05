@@ -5,17 +5,17 @@
 > If you have any [Issues](https://github.com/santec-corporation/TSL_USB_Control_Scripts/issues) related to the code, click [Create New](https://github.com/santec-corporation/TSL_USB_Control_Scripts/issues/new) to create a new issue. 
 
 
-<h1>TSL USB Control Scripts</h1>
+<h1>Santec USB Control Scripts</h1>
 
 ![GitHub top language](https://img.shields.io/github/languages/top/santec-corporation/TSL_USB_Control_Scripts?color=blue)
 
-Python Scripts to command and manage Santec TSL Device(s) connected via USB utilizing the Santec_FTDI DLL as the backend. <br>
-For all TSL Models. Read below for more information.
+Python Scripts to command and manage all Santec Device(s) connected via USB utilizing the Santec_FTDI DLL as the backend. <br>
+Read below for more information.
 
 
 <h2>Introduction</h2>
 
-The Santec TSL Devices connected via USB can be controlled using Python scripts with the help of a DLL (Santec_FTDI).
+The Santec Devices connected via USB can be controlled using Python scripts with the help of a DLL (Santec_FTDI).
 
 The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and easily obtain the data points from the previous scan. It uses the FTDI driver for USB communication and provides simple command-line communication with the TSL.
 
@@ -33,36 +33,9 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
   - Make sure you have the USB Driver (FTDI D2XX), or you can<br>
     Download the [USB DRIVER](https://downloads.santec.com/files/downloadfile/6dbd36cd-a29e-4ca0-a894-8ba4e4fdf0c5), and follow the [INSTRUCTIONS](https://github.com/santec-corporation/TSL_USB_Control_Scripts/blob/ea5c7f016f391d65151b16d61111f892415adb49/DLL/USB_Driver_Installation.pdf) to install the driver on your local machine.
 
-  - Once the USB driver is downloaded, make sure that you are able to recognize the TSL-(model) in the System Device Manager.
+  - Once the USB driver is downloaded, make sure that you are able to recognize the Instrument (Device) in the System Device Manager.
 
   - Make sure that you have all the necessary DLLs before running the Python Script(s).
-
-
-
-<h2>Major Scripts</h2>
-
-  1) TSL_550_USB.py  -  This script communicates with the TSL with the use of Santec Commands (Command Set-2). <br>
-**This script works for TSL-550, TSL-710 devices.
-
-  2) TSL_570_USB.py  -  This script communicates with the TSL with the use of SCPI Commands. <br>
-**This script works for TSL-570 devices.
-
-
-  #### Executable files (.exe)  [ Available in the [Releases](https://github.com/santec-corporation/TSL_USB_Control_Scripts/releases) with the README]
-  3) TSL_550_USB.exe  -  This file communicates with the TSL with the use of Santec Commands (Command Set-2). <br>
-**This script works for TSL-550, TSL-710 devices.
-
-  4) TSL_570_USB.exe  -  This file communicates with the TSL with the use of SCPI Commands. <br>
-**This script works for TSL-570, TSL-770 devices.
-
-
-  #### Additional Scripts [ In Directory [Additional Scripts](https://github.com/santec-corporation/TSL_USB_Control_Scripts/tree/89912792db0268fdf18e949810e1efa820066026/Additional%20Scripts) ]
-  
-  5) MULTI_TSL_550_USB.py  -  Example script to control two or more TSL devices. This script communicates with the TSL using Santec Commands (Command Set-2). <br>
-**This script works for TSL-550, TSL-710 devices.
-
-  6) SIMUL_MULTI_TSL_550_USB.py  -  Example script to run two or more TSL devices simultaneously at the same time (uses Santec Commands). <br>
-**This script works for TSL-550, TSL-710 devices.
 
 
 <h2>DLL List</h2>
@@ -93,74 +66,46 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
     ```python
     import Santec_FTDI as ftdi              # Santec_FTDI is the main namespace
     
-    TSL = ftdi.FTD2xx_helper()              # TSL is an instance to the class FTD2xx_helper
+    ftdi_class = ftdi.FTD2xx_helper         # Calling the FTD2xx_helper class from the Santec_FTDI dll
     ```
 
-5) To print the list of connected TSLs with their information (mainly Serial Number),
-    Using the properties of the DLL (check the README of the DLL directory for more info)
+5) Calling the ListDevices method, which returns all detected Santec instruments, 
     ```python
-    for i in range(TSL.numDevices):
-        print("Device Index: {}".format(i))
-        print("Type: {}".format(TSL.ftdiDeviceList[i].Type))
-        print("ID: {:x}".format(TSL.ftdiDeviceList[i].ID))
-        print("Location ID: {:x}".format(TSL.ftdiDeviceList[i].LocId))
-        print("Serial Number: {}".format(TSL.ftdiDeviceList[i].SerialNumber))
-        print("Description: {}".format(TSL.ftdiDeviceList[i].Description))
-        print("")
+    list_of_devices = ftdi_class.ListDevices()    # ListDevices() returns the list of all Santec instruments
     ```
 
-6) Creating a new instance to initialize and control the specific TSL device by passing the Serial Number as a parameter,
+6) Printing each detected instrument with its name and serial number, (check the Santec_FTDI dll documentation for more device properties),
     ```python
-    TSL = ftdi.FTD2xx_helper('15070009')        # Replace the with the Instrument Serial Number
-    ```
-    If you have more than one TSL connected,
-    ```python
-    TSL1 = ftdi.FTD2xx_helper('15070009')       # Replace the with the Instrument Serial Number
-    TSL2 = ftdi.FTD2xx_helper('18060009')       # Replace the with the Instrument Serial Number
-    .
-    .
-    TSLn = ftdi.FTD2xx_helper('00000000')
+    for device in list_of_devices:    
+      print('\nDetected Instruments:-')
+      print(f'\nDevice Name: {device.Description},  Serial Number: {device.SerialNumber}')
     ```
 
-7) Use the Query() method for querying or reading from the TSL by passing in the instrument command,
+7) Initialize a variable for the instrument by calling the FTD2xx_helper class and passing the instrument serial number as a parameter,
     ```python
-    TSL.Query('*IDN?')                 # Outputs: SANTEC TSL-(ModelNo.), Serial Number, Version Number
+    instrument = ftdi.FTD2xx_helper(serial_number)    # :parameter Example(instrument serial no.) = 15862492, 17834634, 12862492
     ```
     
-    Moreover, for specifically querying or reading the device identification information, you can use the below method,
+
+8) Print the instrument identification,
     ```python
-    TSL.QueryIdn()                     # Outputs: SANTEC TSL-(ModelNo.), Serial Number, Version Number
+    instrument.QueryIdn()                     # Output: SANTEC INS-(ModelNo.), Serial_Number, Version_Number
     ```
 
-8) Use the Write() method for writing to the TSL,
+8) Use the Write() method for writing a command to the instrument,
     ```python
-    TSL.Write('OP10')                   # Sets the Output power of TSL to 10dBm(or mW)
+    instrument.Write('command')                   # refer to the instrument datasheet for commands
     ```
 
-9) Reading the Wavelength data from the TSL, <br>
-
- - For TSL-550, TSL-710, using the GetAllDataPointsFromLastScan_SantecCommand() method,
+8) Use the Query() method for querying a command to the instrument and obtain a response,
     ```python
-    Wavelength = [i/10000 for i in TSL.GetAllDataPointsFromLastScan_SantecCommand()]          
-    print('\nWavelength data of TSL: \n', Wavelength)
-    
-    # Outputs: 
-   Wavelength data of TSL:
-   [1500.002, 1500.0958, 1500.2018,........, 1600]
-    ```
-- For TSL-570, using the GetAllDataPointsFromLastScan_SCPICommand() method,
-    ```python
-    Wavelength = [i/10000 for i in TSL.GetAllDataPointsFromLastScan_SCPICommand()]          
-    print('\nWavelength data of TSL: \n', Wavelength)
-    
-    # Outputs: 
-  Wavelength data of TSL:
-  [1500.002, 1500.0958, 1500.2018,........, 1600]
+    result = instrument.Query('command')                   # refer to the instrument datasheet for commands
+    print(result)
     ```
   
 9) To close the USB connection through the FTDI driver, any future commands sent will throw an exception, as the connection is closed,
     ```python
-    TSL.CloseUSBConnection()
+    instrument.CloseUSBConnection()
     ```
   </details> 
   
