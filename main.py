@@ -49,8 +49,10 @@ class Santec:
         """
          Queries a command to the instrument inputted by the user
         """
-        command = input('\nEnter the command to Query (eg. POW ?): ').lower()
-        print(self.instrument.Query(f'{command}'))
+        command = input('\nEnter the command to Query (eg. POW ?): ').upper()
+        query = self.instrument.Query(f'{command}')
+        time.sleep(0.5)
+        print(query)
 
         return True
 
@@ -58,7 +60,7 @@ class Santec:
         """
         Writes a command to the instrument inputted by the user
         """
-        command = input('\nEnter the command to Write (eg. POW 1): ').lower()
+        command = input('\nEnter the command to Write (eg. POW 1): ').upper()
         if self.instrument.Write(f'{command}'):
             print('\nDone')
 
@@ -72,6 +74,10 @@ class Santec:
 
         return True
 
+    @staticmethod
+    def Exit():
+        sys.exit()
+
     def instrumentMenu(self):
         """
         Menu to select Query, Write or QueryIdn to the instrument
@@ -80,7 +86,8 @@ class Santec:
             '1': self.query,
             '2': self.write,
             '3': self.queryIdn,
-            '4': mainMenu
+            '4': mainMenu,
+            '5': self.Exit
         }
         while True:
             time.sleep(0.2)
@@ -90,6 +97,7 @@ class Santec:
                                    '\n2. Write Instrument'
                                    '\n3. QueryIdn Instrument'
                                    '\n4. Go back'
+                                   '\n5. Exit'
                                    '\nSelect an operation: '
                                    )
 
@@ -127,6 +135,7 @@ def mainMenu():
 
         if user_select_instrument_number in device_list:
             instrument = ftdi.FTD2xx_helper(user_select_instrument_number)
+            print(f'CONNECTION SUCCESSFUL, CONNECTED TO {instrument.QueryIdn()}')
             Santec(instrument).instrumentMenu()
         else:
             print('\nInvalid serial number.....try again.....')
