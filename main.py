@@ -49,9 +49,9 @@ class Santec:
         """
          Queries a command to the instrument inputted by the user
         """
-        command = input('\nEnter the command to Query (eg. POW ?): ').upper()
+        command = input("\nEnter the command to Query (eg. POW ?) ").upper()
         query = self.instrument.Query(f'{command}')
-        time.sleep(0.5)
+        time.sleep(0.2)
         print(query)
 
         return True
@@ -60,9 +60,9 @@ class Santec:
         """
         Writes a command to the instrument inputted by the user
         """
-        command = input('\nEnter the command to Write (eg. POW 1): ').upper()
+        command = input("\nEnter the command to Write (eg. POW 1) ").upper()
         if self.instrument.Write(f'{command}'):
-            print('\nDone')
+            print("\nDone")
 
         return True
 
@@ -74,8 +74,17 @@ class Santec:
 
         return True
 
-    @staticmethod
-    def Exit():
+    def closeConnection(self):
+        print("\nClosing instrument USB connection...")
+        self.instrument.CloseUsbConnection()
+
+    def gotoMainMenu(self):
+        self.closeConnection()
+        time.sleep(0.1)
+        mainMenu()
+
+    def Exit(self):
+        self.closeConnection()
         sys.exit()
 
     def instrumentMenu(self):
@@ -86,25 +95,25 @@ class Santec:
             '1': self.query,
             '2': self.write,
             '3': self.queryIdn,
-            '4': mainMenu,
+            '4': self.gotoMainMenu,
             '5': self.Exit
         }
         while True:
             time.sleep(0.2)
             os.system('cls')
-            user_operation = input('\nInstrument Menu:-'                                   
-                                   '\n1. Query Instrument'
-                                   '\n2. Write Instrument'
-                                   '\n3. QueryIdn Instrument'
-                                   '\n4. Go back'
-                                   '\n5. Exit'
-                                   '\nSelect an operation: '
+            user_operation = input("\nInstrument Menu:-"                                   
+                                   "\n1. Query Instrument"
+                                   "\n2. Write Instrument"
+                                   "\n3. QueryIdn Instrument"
+                                   "\n4. Go back"
+                                   "\n5. Exit"
+                                   "\nSelect an operation: "
                                    )
 
             if user_operation in menu:
                 menu[user_operation]()
             else:
-                print('\nInvalid selection.....try again.....')
+                print("\nInvalid selection.....try again.....")
 
 
 # Main menu to select to instrument
@@ -121,24 +130,24 @@ def mainMenu():
 
     # Print the Name and Serial number of each detected instrument
     if not list_of_devices:
-        print('\nNo instruments found')
+        print("\nNo instruments found")
     else:
-        for device in list_of_devices:
+        print("\nDetected Instruments:-")
+        for index, device in enumerate(list_of_devices, start=1):
             if device:
-                print('\nDetected Instruments:-')
-                print(f'\nDevice Name: {device.Description},  Serial Number: {device.SerialNumber}')
+                print(f"\n{index}. Device Name: {device.Description},  Serial Number: {device.SerialNumber}")
                 device_list.append(device.SerialNumber)
 
     # Instrument selection and the control class initialization
     while device_list:
-        user_select_instrument_number = input('\nEnter the serial number of the instrument to control (eg. 15862492): ')
+        user_select_instrument_number = input("\nEnter the serial number of the instrument to control (eg. 15862492): ")
 
         if user_select_instrument_number in device_list:
             instrument = ftdi.FTD2xx_helper(user_select_instrument_number)
-            print(f'CONNECTION SUCCESSFUL, CONNECTED TO {instrument.QueryIdn()}')
+            print(f"CONNECTION SUCCESSFUL, CONNECTED TO {instrument.QueryIdn()}")
             Santec(instrument).instrumentMenu()
         else:
-            print('\nInvalid serial number.....try again.....')
+            print("\nInvalid serial number.....try again.....")
 
 
 if __name__ == '__main__':
