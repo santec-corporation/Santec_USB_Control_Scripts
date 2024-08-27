@@ -33,10 +33,10 @@ The Santec_FTDI DLL (Santec FTD2xx_helper) is designed to connect to TSL(s) and 
 
 <h2>Major Scripts</h2>
 
-  1) TSL_550_USB.py  -  This script communicates with the TSL with the use of Santec Commands (Command Set-2). <br>
+  1) tsl_550.py  -  This script communicates with the TSL with the use of Santec Commands (Command Set-2). <br>
     **This script works only with TSL-550, TSL-710 series instruments.
 
-  2) TSL_570_USB.py  -  This script communicates with the TSL with the use of SCPI Commands. <br>
+  2) tsl_570.py  -  This script communicates with the TSL with the use of SCPI Commands. <br>
     **This script works only with TSL-570 series instruments.
 
 *Executable files can be found in the releases.
