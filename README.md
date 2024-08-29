@@ -20,8 +20,14 @@
 
 <h2>Files</h2>
 
-1) multi_tsl_550.py  -  Example script to control two or more TSL instruments. This script communicates with the TSL instrument using Santec Commands (Command Set-2).
-**This script only with TSL-550, TSL-710 series instruments.
+1) multi_tsl_550.py  -  Example script to control two or more TSL instruments. This script communicates with the TSL instrument using Santec commands (command set-2).
+**This script works only with the TSL-550 and TSL-710 series instruments.
 
-2) simul_multi_tsl_550.py  -  Example script to control two or more TSL instruments simultaneously at the same time. (uses Santec Commands)
-**This script only with TSL-550, TSL-710 series instruments.
+2) multi_tsl_570.py  -  Example script to control two or more TSL instruments. This script communicates with the TSL instrument using SCPI commands.
+**This script works only with the TSL-570 series instruments.
+
+3) simul_multi_tsl_550.py  -  Example script to control two or more TSL instruments simultaneously. (uses Santec commands)
+**This script works only with the TSL-550 and TSL-710 series instruments.
+
+4) simul_multi_tsl_550.py  -  Example script to control two or more TSL instruments simultaneously. (uses SCPI commands)
+**This script works only with the TSL-570 series instruments.
